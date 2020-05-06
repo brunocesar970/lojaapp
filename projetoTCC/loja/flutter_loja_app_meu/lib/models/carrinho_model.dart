@@ -4,140 +4,150 @@ import 'package:flutter_loja_app_meu/datas/produto_carrinho.dart';
 import 'package:flutter_loja_app_meu/models/user_models.dart';
 import 'package:scoped_model/scoped_model.dart';
 
-class CarrinhoModel extends Model{
+class CarrinhoModel extends Model {
   UserModel user;
-List<CarrinhoProduto> products = [];
-CarrinhoModel(this.user){
-  if(user.isLoggedIn())
-    _loadCartItem();
-}
+  List<CarrinhoProduto> products = [];
+  CarrinhoModel(this.user) {
+    if (user.isLoggedIn()) _loadCartItem();
+  }
 
-String cupomCode;
-int descontoPorcentagem = 0;
-bool isLoading =false;
+  String cupomCode;
+  int descontoPorcentagem = 0;
+  bool isLoading = false;
 
-static CarrinhoModel of(BuildContext context) =>
-    ScopedModel.of<CarrinhoModel>(context);
+  static CarrinhoModel of(BuildContext context) =>
+      ScopedModel.of<CarrinhoModel>(context);
 
-void addCarrinhoitem(CarrinhoProduto carrinhoProduto){
-  products.add(carrinhoProduto);
+  void addCarrinhoitem(CarrinhoProduto carrinhoProduto) {
+    products.add(carrinhoProduto);
 
-  Firestore.instance.collection("user")
-      .document(user.firebaseUser.uid).collection("carrinho")
-      .add(carrinhoProduto.toMap()).then((doc){
-        carrinhoProduto.cid = doc.documentID;
-  });
-  notifyListeners();
-}
+    Firestore.instance
+        .collection("user")
+        .document(user.firebaseUser.uid)
+        .collection("carrinho")
+        .add(carrinhoProduto.toMap())
+        .then((doc) {
+      carrinhoProduto.cid = doc.documentID;
+    });
+    notifyListeners();
+  }
 
-void removerCarrinhoItem(CarrinhoProduto carrinhoProduto){
-Firestore.instance.collection("user").document(user.firebaseUser.uid)
-    .collection("carrinho").document(carrinhoProduto.cid).delete();
+  void removerCarrinhoItem(CarrinhoProduto carrinhoProduto) {
+    Firestore.instance
+        .collection("user")
+        .document(user.firebaseUser.uid)
+        .collection("carrinho")
+        .document(carrinhoProduto.cid)
+        .delete();
 
-products.remove(carrinhoProduto);
-notifyListeners();
-}
+    products.remove(carrinhoProduto);
+    notifyListeners();
+  }
 
-void decProduct (CarrinhoProduto carrinhoProduto){
-  carrinhoProduto.quantity--;
-  Firestore.instance.collection("user").document(user.firebaseUser.uid).collection
-    ("carrinho").document(carrinhoProduto.cid).updateData(carrinhoProduto.toMap());
+  void decProduct(CarrinhoProduto carrinhoProduto) {
+    carrinhoProduto.quantity--;
+    Firestore.instance
+        .collection("user")
+        .document(user.firebaseUser.uid)
+        .collection("carrinho")
+        .document(carrinhoProduto.cid)
+        .updateData(carrinhoProduto.toMap());
 
-  notifyListeners();
-}
+    notifyListeners();
+  }
 
+  void incProduct(CarrinhoProduto carrinhoProduto) {
+    carrinhoProduto.quantity++;
+    Firestore.instance
+        .collection("user")
+        .document(user.firebaseUser.uid)
+        .collection("carrinho")
+        .document(carrinhoProduto.cid)
+        .updateData(carrinhoProduto.toMap());
+    notifyListeners();
+  }
 
-void incProduct (CarrinhoProduto carrinhoProduto){
-  carrinhoProduto.quantity++;
-  Firestore.instance.collection("user").document(user.firebaseUser.uid).
-  collection("carrinho").document(carrinhoProduto.cid).updateData(carrinhoProduto.toMap());
-  notifyListeners();
-}
+  void setCupom(String cupomCode, int descontoPorcentagem) {
+    this.cupomCode = cupomCode;
+    this.descontoPorcentagem = descontoPorcentagem;
+  }
 
+  void _loadCartItem() async {
+    QuerySnapshot query = await Firestore.instance
+        .collection("user")
+        .document(user.firebaseUser.uid)
+        .collection("carrinho")
+        .getDocuments();
 
-void setCupom(String cupomCode, int descontoPorcentagem){
-  this.cupomCode =cupomCode;
-  this.descontoPorcentagem = descontoPorcentagem;
-}
+    products = query.documents
+        .map((doc) => CarrinhoProduto.fromDocument(doc))
+        .toList();
+    notifyListeners();
+  }
 
+  double getProdutoPreco() {
+    double price = 0.0;
+    for (CarrinhoProduto c in products) {
+      if (c.productData != null) price += c.quantity * c.productData.price;
+    }
+    return price;
+  }
 
+  double getDesconto() {
+    return getProdutoPreco() * descontoPorcentagem / 100;
+  }
 
+  double fretePreco() {
+    return 9.99;
+  }
 
+  void updatePreco() {
+    notifyListeners();
+  }
 
-void _loadCartItem () async{
+  Future<String> finalizarPedido() async {
+    if (products.length == 0) return null;
 
-  QuerySnapshot query = await Firestore.instance.collection("user").document(user.firebaseUser.uid).
-  collection("carrinho").getDocuments();
+    isLoading = true;
+    notifyListeners();
 
-  products = query.documents.map((doc)=> CarrinhoProduto.fromDocument(doc)).toList();
-  notifyListeners();
+    double produtosPreco = getProdutoPreco();
+    double getfretePreco = fretePreco();
+    double desconto = getDesconto();
 
-}
-
-double getProdutoPreco(){
-double price =0.0;
-for(CarrinhoProduto c in products){
-  if(c.productData != null)
-    price += c.quantity * c.productData.price;
-}
-return price;
-
-}
-double getDesconto(){
-return getProdutoPreco() * descontoPorcentagem / 100;
-}
-double fretePreco(){
- return 9.99;
-}
-void updatePreco(){
-  notifyListeners();
-}
-
-Future<String> finalizarPedido() async{
-  if(products.length == 0)return null;
-
-  isLoading = true;
-  notifyListeners();
-
-  double produtosPreco = getProdutoPreco();
-  double getfretePreco = fretePreco();
-  double desconto = getDesconto();
-
-  DocumentReference refOrdem = await Firestore.instance.collection("ordens").add(
-    {
-    "clienteId": user.firebaseUser.uid,
-      "products": products.map((carrinhoProduto)=>
-      carrinhoProduto.toMap()
-      ).toList(),
+    DocumentReference refOrdem =
+        await Firestore.instance.collection("ordens").add({
+      "clienteId": user.firebaseUser.uid,
+      "products":
+          products.map((carrinhoProduto) => carrinhoProduto.toMap()).toList(),
       "fretePreco": getfretePreco,
-      "produtoPreco":produtosPreco,
+      "produtoPreco": produtosPreco,
       "desconto": desconto,
       "precoTotal": produtosPreco - desconto + getfretePreco,
       "status": 1
+    });
 
+    Firestore.instance
+        .collection("user")
+        .document(user.firebaseUser.uid)
+        .collection("ordem")
+        .document(refOrdem.documentID)
+        .setData({"ordemId": refOrdem.documentID});
+
+    QuerySnapshot query = await Firestore.instance
+        .collection("user")
+        .document(user.firebaseUser.uid)
+        .collection("carrinho")
+        .getDocuments();
+
+    for (DocumentSnapshot doc in query.documents) {
+      doc.reference.delete();
     }
-  );
-
-  Firestore.instance.collection("user").document(user.firebaseUser.uid)
-  .collection("ordem").document(refOrdem.documentID).setData(
-    {
-      "ordemId" : refOrdem.documentID
-    }
-  );
-
-  QuerySnapshot query = await Firestore.instance.collection("user").
-  document(user.firebaseUser.uid).collection("carrinho").getDocuments();
-
-  for (DocumentSnapshot doc in query.documents){
-    doc.reference.delete();
+    products.clear();
+    cupomCode = null;
+    descontoPorcentagem = 0;
+    isLoading = false;
+    notifyListeners();
+    return refOrdem.documentID;
   }
-products.clear();
-  cupomCode =null;
-  descontoPorcentagem = 0;
-  isLoading =false;
-  notifyListeners();
-  return refOrdem.documentID;
-
-}
-
 }

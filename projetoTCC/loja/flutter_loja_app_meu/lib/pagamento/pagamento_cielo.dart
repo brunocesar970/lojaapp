@@ -1,13 +1,13 @@
 import 'package:cielo_ecommerce/cielo_ecommerce.dart';
-import 'package:flutter_loja_app_meu/tabs/meu_cartao.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 class Cielo extends Model{
-
-  bool isLoading = false;
-
-  makePayment() async {
-    isLoading = true;
+  static makePayment({
+    String numeroCartao,
+    String nameController,
+    String dataController,
+    String cvvController,
+  }) async {
     //inicia objeto da api
     final CieloEcommerce cielo = CieloEcommerce(
         environment: Environment.production, // ambiente de desenvolvimento
@@ -15,8 +15,6 @@ class Cielo extends Model{
           merchantId: "57be18b4-e44c-4a5d-9688-e360ccc9d27a",
           merchantKey: "mebOy0Q6U4OxVghgDoXCbfP1xcNVTH6q1uDmGikP",
         ));
-
-
 
     print("Transação Simples");
     print("Iniciando pagamento....");
@@ -30,15 +28,17 @@ class Cielo extends Model{
         type: TypePayment.creditCard, // Tipo do Meio de Pagamento
         amount: 100, // Valor do Pedido (ser enviado em centavos)
         installments: 1, // Número de Parcelas
-        softDescriptor: "Mensagem", // Descrição que aparecerá no extrato do usuário. Apenas 15 caracteres
+        softDescriptor:
+            "Mensagem", // Descrição que aparecerá no extrato do usuário. Apenas 15 caracteres
         creditCard: CreditCard(
-            cardNumber: numeroCartaoController.text, // Número do Cartão do Comprador
-            holder:nameController.text, // Nome do Comprador impresso no cartão
-            expirationDate: dataController.text, // Data de validade impresso no cartão
-            securityCode: CVVController.text, // Código de segurança impresso no verso do cartão
+            cardNumber: numeroCartao, // Número do Cartão do Comprador
+            holder: nameController, // Nome do Comprador impresso no cartão
+            expirationDate:
+                dataController, // Data de validade impresso no cartão
+            securityCode:
+                cvvController, // Código de segurança impresso no verso do cartão
             brand: 'Master', // Bandeira do cartão
-            saveCard: true
-        ),
+            saveCard: true),
       ),
     );
 
@@ -46,20 +46,11 @@ class Cielo extends Model{
       var response = await cielo.createSale(sale);
 
       print('paymentId ${response.payment.paymentId}');
-
     } on CieloException catch (e) {
       print(e);
       print(e.message);
       print(e.errors[0].message);
       print(e.errors[0].code);
     }
-    notifyListeners();
   }
-
 }
-
-
-
-
-
-
