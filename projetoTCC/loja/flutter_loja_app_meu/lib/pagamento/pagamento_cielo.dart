@@ -1,51 +1,45 @@
 import 'package:cielo_ecommerce/cielo_ecommerce.dart';
-import 'package:scoped_model/scoped_model.dart';
+import 'package:flutter/material.dart';
 
-class Cielo extends Model{
-  static makePayment({
-    String numeroCartao,
-    String nameController,
-    String dataController,
-    String cvvController,
+class Cielo {
+  static final CieloEcommerce _cielo = CieloEcommerce(
+    environment: Environment.production,
+    merchant: Merchant(
+      merchantId: "57be18b4-e44c-4a5d-9688-e360ccc9d27a",
+      merchantKey: "mebOy0Q6U4OxVghgDoXCbfP1xcNVTH6q1uDmGikP",
+    ),
+  );
+
+  static Future<void> makePayment({
+    @required String cardNumber,
+    @required String nameController,
+    @required String dataController,
+    @required String cvvController,
   }) async {
-    //inicia objeto da api
-    final CieloEcommerce cielo = CieloEcommerce(
-        environment: Environment.production, // ambiente de desenvolvimento
-        merchant: Merchant(
-          merchantId: "57be18b4-e44c-4a5d-9688-e360ccc9d27a",
-          merchantKey: "mebOy0Q6U4OxVghgDoXCbfP1xcNVTH6q1uDmGikP",
-        ));
-
-    print("Transação Simples");
-    print("Iniciando pagamento....");
-    //Objeto de venda
+    print('Transação Simples\nIniciando pagamento....');
     Sale sale = Sale(
-      merchantOrderId: "2020032601", // Numero de identificação do Pedido
+      merchantOrderId: "2020032601",
       customer: Customer(
-        name: "Comprador crédito simples", // Nome do Comprador
+        name: "Comprador crédito simples",
       ),
       payment: Payment(
-        type: TypePayment.creditCard, // Tipo do Meio de Pagamento
-        amount: 100, // Valor do Pedido (ser enviado em centavos)
-        installments: 1, // Número de Parcelas
-        softDescriptor:
-            "Mensagem", // Descrição que aparecerá no extrato do usuário. Apenas 15 caracteres
+        type: TypePayment.creditCard,
+        amount: 100,
+        installments: 1,
+        softDescriptor: "Mensagem",
         creditCard: CreditCard(
-            cardNumber: numeroCartao, // Número do Cartão do Comprador
-            holder: nameController, // Nome do Comprador impresso no cartão
-            expirationDate:
-                dataController, // Data de validade impresso no cartão
-            securityCode:
-                cvvController, // Código de segurança impresso no verso do cartão
-            brand: 'Master', // Bandeira do cartão
-            saveCard: true),
+          cardNumber: cardNumber,
+          holder: nameController,
+          expirationDate: dataController,
+          securityCode: cvvController,
+          brand: 'Master',
+          saveCard: true,
+        ),
       ),
     );
-
     try {
-      var response = await cielo.createSale(sale);
-
-      print('paymentId ${response.payment.paymentId}');
+      Sale response = await _cielo.createSale(sale);
+      print('Payment Id:${response.payment.paymentId}');
     } on CieloException catch (e) {
       print(e);
       print(e.message);

@@ -52,7 +52,6 @@ class CarrinhoModel extends Model {
         .collection("carrinho")
         .document(carrinhoProduto.cid)
         .updateData(carrinhoProduto.toMap());
-
     notifyListeners();
   }
 
