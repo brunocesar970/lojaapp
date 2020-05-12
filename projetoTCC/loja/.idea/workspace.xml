@@ -5,12 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e5f477f2-5e37-4617-9ef8-63a494eb2f56" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_loja_app_meu/lib/models/carrinho_model.dart" beforeDir="false" afterPath="$PROJECT_DIR$/flutter_loja_app_meu/lib/models/carrinho_model.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/flutter_loja_app_meu/lib/pagamento/pagamento_cielo.dart" beforeDir="false" afterPath="$PROJECT_DIR$/flutter_loja_app_meu/lib/pagamento/pagamento_cielo.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_loja_app_meu/lib/screen/carrinho_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/flutter_loja_app_meu/lib/screen/carrinho_screen.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/flutter_loja_app_meu/lib/tabs/meu_cartao.dart" beforeDir="false" afterPath="$PROJECT_DIR$/flutter_loja_app_meu/lib/tabs/meu_cartao.dart" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -29,11 +25,11 @@
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="dart.analysis.tool.window.force.activate" value="false" />
     <property name="io.flutter.reload.alreadyRun" value="true" />
-    <property name="last_opened_file_path" value="$USER_HOME$/Desktop/androidEstudo/loja" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../../teste teste/loja 2 versao" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.0" />
-    <property name="settings.editor.selected.configurable" value="flutter.settings" />
+    <property name="settings.editor.selected.configurable" value="dart.settings" />
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
   <component name="RunDashboard">

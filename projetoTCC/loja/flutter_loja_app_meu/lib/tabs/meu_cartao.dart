@@ -88,11 +88,21 @@ class _MeuCartaoState extends State<MeuCartao> {
                           ),
                           keyboardType: TextInputType.number,
                           controller: numeroCartaoController,
+                          onChanged: (value) {
+                            setState(() {
+                              cardNumber = value;
+                            });
+                          },
                         ),
                         SizedBox(height: 16.0),
                         TextFormField(
                           decoration: InputDecoration(hintText: "Nome"),
                           controller: nameController,
+                          onChanged: (value) {
+                            setState(() {
+                              cardHolderName = value;
+                            });
+                          },
                         ),
                         SizedBox(height: 16.0),
                         TextFormField(
@@ -100,12 +110,22 @@ class _MeuCartaoState extends State<MeuCartao> {
                               hintText: "expiração data MM/AAAA"),
                           keyboardType: TextInputType.datetime,
                           controller: dataController,
+                          onChanged: (value) {
+                            setState(() {
+                              expiryDate = value;
+                            });
+                          },
                         ),
                         SizedBox(height: 16.0),
                         TextFormField(
                           decoration: InputDecoration(hintText: "CVV"),
                           keyboardType: TextInputType.number,
                           controller: cvvController,
+                          onChanged: (value) {
+                            setState(() {
+                              cvv = value;
+                            });
+                          },
                         ),
                         SizedBox(height: 25.0),
                         SizedBox(
