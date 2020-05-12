@@ -3,8 +3,13 @@ import 'package:awesome_card/awesome_card.dart';
 import 'package:flutter_loja_app_meu/pagamento/pagamento_cielo.dart';
 
 class MeuCartao extends StatefulWidget {
+  final double valor;
+
+  const MeuCartao({Key key, this.valor}) : super(key: key);
+
   @override
   _MeuCartaoState createState() => _MeuCartaoState();
+
 }
 
 class _MeuCartaoState extends State<MeuCartao> {
@@ -75,8 +80,7 @@ class _MeuCartaoState extends State<MeuCartao> {
                     horizontal: 20,
                   ),
                   child: Form(
-                    child: ListView(
-                      padding: EdgeInsets.all(16.0),
+                    child: Column(
                       children: <Widget>[
                         TextFormField(
                           decoration: InputDecoration(
@@ -118,6 +122,7 @@ class _MeuCartaoState extends State<MeuCartao> {
                                 nameController: nameController.text,
                                 dataController: dataController.text,
                                 cvvController: cvvController.text,
+                                valor: widget.valor
                               );
                             },
                           ),

@@ -93,17 +93,9 @@ class CarrinhoScreen extends StatelessWidget {
                 DescontoCard(),
                 LocalizacaoCard(),
                 CarrinhoPreco(() {
-
                   Navigator.of(context).pushReplacement(MaterialPageRoute(
-                        builder: (context)=> MeuCartao()
-                       ));
-
-
-                  //String orderId = await model.finalizarPedido();
-                //  if(orderId != null)
-                   // Navigator.of(context).pushReplacement(MaterialPageRoute(
-                    //  builder: (context)=> OrdemScreen(orderId)
-                    // ));
+                      builder: (context)=> MeuCartao()
+                  ));
                 })
                   ],
                 );

@@ -104,6 +104,10 @@ class CarrinhoModel extends Model {
     notifyListeners();
   }
 
+  double precoTotal(){
+    return getProdutoPreco() + fretePreco() - getDesconto();
+  }
+
   Future<String> finalizarPedido() async {
     if (products.length == 0) return null;
 
@@ -113,6 +117,7 @@ class CarrinhoModel extends Model {
     double produtosPreco = getProdutoPreco();
     double getfretePreco = fretePreco();
     double desconto = getDesconto();
+
 
     DocumentReference refOrdem =
         await Firestore.instance.collection("ordens").add({
@@ -148,5 +153,7 @@ class CarrinhoModel extends Model {
     isLoading = false;
     notifyListeners();
     return refOrdem.documentID;
+
+    }
   }
-}
+

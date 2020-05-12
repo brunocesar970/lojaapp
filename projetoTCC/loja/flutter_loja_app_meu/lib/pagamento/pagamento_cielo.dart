@@ -15,6 +15,7 @@ class Cielo {
     @required String nameController,
     @required String dataController,
     @required String cvvController,
+    @required double valor,
   }) async {
     print('Transação Simples\nIniciando pagamento....');
     Sale sale = Sale(
@@ -24,7 +25,7 @@ class Cielo {
       ),
       payment: Payment(
         type: TypePayment.creditCard,
-        amount: 100,
+        amount: valor.toInt(),
         installments: 1,
         softDescriptor: "Mensagem",
         creditCard: CreditCard(
