@@ -134,6 +134,7 @@ class _MeuCartaoState extends State<MeuCartao> {
                               cvv = value;
                             });
                           },
+                          focusNode: _focusNode,
                         ),
                         SizedBox(height: 25.0),
                         SizedBox(
@@ -179,4 +180,9 @@ class _MeuCartaoState extends State<MeuCartao> {
       textColor: Colors.white,
       fontSize: 16.0
   );
+
+ /* String orderId = await model.finalizarPedido();
+  if(orderId != null)
+  Navigator.of(context).pushReplacement(MaterialPageRoute(
+  builder: (context)=> OrdemScreen(orderId) */
 }
