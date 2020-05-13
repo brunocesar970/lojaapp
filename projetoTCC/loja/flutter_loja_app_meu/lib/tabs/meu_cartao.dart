@@ -3,6 +3,7 @@ import 'package:awesome_card/awesome_card.dart';
 import 'package:flutter_loja_app_meu/models/carrinho_model.dart';
 import 'package:flutter_loja_app_meu/pagamento/pagamento_cielo.dart';
 import 'package:flutter_loja_app_meu/widget/custom_drawer.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class MeuCartao extends StatefulWidget {
 
@@ -29,6 +30,7 @@ class _MeuCartaoState extends State<MeuCartao> {
   String cvv = "";
   bool showBack = false;
   FocusNode _focusNode;
+  bool loading =false;
 
   @override
   void initState() {
@@ -137,8 +139,8 @@ class _MeuCartaoState extends State<MeuCartao> {
                         SizedBox(
                           height: 44.0,
                           child: RaisedButton(
-                            child: Text(
-                              "Comprar",
+                             child: loading ? CircularProgressIndicator(backgroundColor: Colors.white,) : Text(
+                          "Comprar",
                               style: TextStyle(fontSize: 18.0),
                             ),
                             color: Colors.blue,
@@ -150,6 +152,10 @@ class _MeuCartaoState extends State<MeuCartao> {
                                 cvvController: cvvController.text,
                                 valor: CarrinhoModel.of(context).precoTotal()
                               );
+                              toast();
+                              setState(() {
+                                loading = false;
+                              });
                             },
                           ),
                         ),
@@ -164,4 +170,13 @@ class _MeuCartaoState extends State<MeuCartao> {
       ),
     );
   }
+  toast() => Fluttertoast.showToast(
+      msg: "Pagamento aprovado com sucesso!",
+      toastLength: Toast.LENGTH_SHORT,
+      gravity: ToastGravity.TOP,
+      timeInSecForIosWeb: 2,
+      backgroundColor: Colors.green,
+      textColor: Colors.white,
+      fontSize: 16.0
+  );
 }
