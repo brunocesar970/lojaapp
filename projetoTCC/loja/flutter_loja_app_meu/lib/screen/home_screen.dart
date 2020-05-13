@@ -22,8 +22,7 @@ class HomeScreen extends StatelessWidget {
              drawer: CustomDrawer(_pageController),
            ),
             Scaffold(
-              drawer: CustomDrawer(_pageController),
-              body: MeuCartao(),
+              body: MeuCartao(drawer: CustomDrawer(_pageController)),
             ),
             Scaffold(
               appBar: AppBar(

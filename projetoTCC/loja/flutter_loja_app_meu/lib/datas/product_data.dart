@@ -4,7 +4,6 @@ class ProductData {
   String category;
   String id;
   String description;
-
   double price;
   List imagens;
   List size;

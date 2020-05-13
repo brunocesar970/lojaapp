@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:awesome_card/awesome_card.dart';
+import 'package:flutter_loja_app_meu/models/carrinho_model.dart';
 import 'package:flutter_loja_app_meu/pagamento/pagamento_cielo.dart';
+import 'package:flutter_loja_app_meu/widget/custom_drawer.dart';
 
 class MeuCartao extends StatefulWidget {
-  final double valor;
 
-  const MeuCartao({Key key, this.valor}) : super(key: key);
+
+
+  final CustomDrawer drawer;
+
+  const MeuCartao({Key key, this.drawer}) : super(key: key);
 
   @override
   _MeuCartaoState createState() => _MeuCartaoState();
@@ -45,6 +50,7 @@ class _MeuCartaoState extends State<MeuCartao> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: widget.drawer,
       appBar: AppBar(
         title: Text("Meus Cartões"),
         centerTitle: true,
@@ -142,7 +148,7 @@ class _MeuCartaoState extends State<MeuCartao> {
                                 nameController: nameController.text,
                                 dataController: dataController.text,
                                 cvvController: cvvController.text,
-                                valor: widget.valor
+                                valor: CarrinhoModel.of(context).precoTotal()
                               );
                             },
                           ),

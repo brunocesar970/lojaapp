@@ -25,7 +25,7 @@ class Cielo {
       ),
       payment: Payment(
         type: TypePayment.creditCard,
-        amount: 100,
+        amount: (valor * 100).toInt(),
         installments: 1,
         softDescriptor: "Mensagem",
         creditCard: CreditCard(

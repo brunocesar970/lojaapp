@@ -97,7 +97,7 @@ class CarrinhoModel extends Model {
   }
 
   double fretePreco() {
-    return 9.99;
+    return 0.10;
   }
 
   void updatePreco() {

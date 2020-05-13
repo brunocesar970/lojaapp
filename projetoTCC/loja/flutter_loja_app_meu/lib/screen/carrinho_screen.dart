@@ -3,14 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_loja_app_meu/models/carrinho_model.dart';
 import 'package:flutter_loja_app_meu/models/user_models.dart';
 import 'package:flutter_loja_app_meu/screen/login_screen.dart';
-import 'package:flutter_loja_app_meu/screen/ordem_screen.dart';
 import 'package:flutter_loja_app_meu/tabs/meu_cartao.dart';
 import 'package:flutter_loja_app_meu/tiles/cart_tile.dart';
 import 'package:flutter_loja_app_meu/widget/carrinho_preco.dart';
 import 'package:flutter_loja_app_meu/widget/desconto_card.dart';
 import 'package:flutter_loja_app_meu/widget/localizacao_card.dart';
 import 'package:scoped_model/scoped_model.dart';
-import 'dart:async';
+
 
 class CarrinhoScreen extends StatelessWidget {
   @override

@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_loja_app_meu/datas/product_data.dart';
+import 'package:flutter_loja_app_meu/screen/product_screen.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:transparent_image/transparent_image.dart';
 
@@ -63,18 +65,26 @@ class HomeTab extends StatelessWidget {
                       ).toList(),
                       children: snapshot.data.documents.map(
                           (doc){
-                            return FadeInImage.memoryNetwork(
-                                placeholder: kTransparentImage,
-                                image: doc.data["image"],
-                                fit: BoxFit.cover,
+                            return GestureDetector(
+                              onTap: () async {
+                                var produto = await Firestore.instance.collection("produtos").document(doc.data["categoria"]).collection("itens").document(doc.data["produto"]).get();
+
+                                ProductData p = ProductData.fromDocument(produto);
+
+                                Navigator.of(context).push(
+                                    MaterialPageRoute(builder: (_)=>ProductScreen(p))
+                                );
+                              },
+                              child: FadeInImage.memoryNetwork(
+                                  placeholder: kTransparentImage,
+                                  image: doc.data["image"],
+                                  fit: BoxFit.cover,
+                              ),
                             );
                           }
                       ).toList(),
                   );
                   }
-
-
-
               },
             ),
 
