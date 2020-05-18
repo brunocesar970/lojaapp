@@ -108,6 +108,14 @@ class CarrinhoModel extends Model {
     return getProdutoPreco() + fretePreco() - getDesconto();
   }
 
+  int pegarOrdemID(CarrinhoProduto carrinhoProduto){
+    Firestore.instance
+        .collection("user")
+        .document(user.firebaseUser.uid)
+        .collection("carrinho")
+        .document(carrinhoProduto.cid).get();
+}
+
   Future<String> finalizarPedido() async {
     if (products.length == 0) return null;
 

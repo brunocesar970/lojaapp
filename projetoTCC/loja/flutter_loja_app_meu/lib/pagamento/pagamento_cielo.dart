@@ -16,10 +16,11 @@ class Cielo {
     @required String dataController,
     @required String cvvController,
     @required double valor,
+    @required int ordem,
   }) async {
     print('Transação Simples\nIniciando pagamento....');
     Sale sale = Sale(
-      merchantOrderId: "2020032601",
+      merchantOrderId: "237474784",
       customer: Customer(
         name: "Comprador crédito simples",
       ),
@@ -27,7 +28,7 @@ class Cielo {
         type: TypePayment.creditCard,
         amount: (valor * 100).toInt(),
         installments: 1,
-        softDescriptor: "Mensagem",
+        softDescriptor: "teste23",
         creditCard: CreditCard(
           cardNumber: cardNumber,
           holder: nameController,
@@ -41,6 +42,11 @@ class Cielo {
     try {
       Sale response = await _cielo.createSale(sale);
       print('Payment Id:${response.payment.paymentId}');
+      print("Status:${response.payment.returnMessage}");
+      print("ReturnCODIGO ${response.payment.returnCode}");
+      print("authorizationCode ${response.payment.authorizationCode}");
+      print("authenticate ${response.payment.authenticate}");
+      print("fraudAnalysis ${response.payment.fraudAnalysis}");
     } on CieloException catch (e) {
       print(e);
       print(e.message);

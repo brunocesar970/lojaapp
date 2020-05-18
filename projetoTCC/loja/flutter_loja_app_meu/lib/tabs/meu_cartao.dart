@@ -10,8 +10,9 @@ class MeuCartao extends StatefulWidget {
 
 
   final CustomDrawer drawer;
+  final int ordem;
 
-  const MeuCartao({Key key, this.drawer}) : super(key: key);
+  const MeuCartao({Key key, this.drawer,this.ordem}) : super(key: key);
 
   @override
   _MeuCartaoState createState() => _MeuCartaoState();
@@ -151,7 +152,9 @@ class _MeuCartaoState extends State<MeuCartao> {
                                 nameController: nameController.text,
                                 dataController: dataController.text,
                                 cvvController: cvvController.text,
-                                valor: CarrinhoModel.of(context).precoTotal()
+                                valor: CarrinhoModel.of(context).precoTotal(),
+
+
                               );
                               toast();
                               setState(() {
