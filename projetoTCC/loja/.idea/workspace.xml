@@ -1,14 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AnalysisUIOptions">
+    <option name="GROUP_BY_SEVERITY" value="true" />
+  </component>
   <component name="AndroidLogFilters">
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e5f477f2-5e37-4617-9ef8-63a494eb2f56" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/flutter_loja_app_meu/lib/tabs/email.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/flutter_loja_app_meu/lib/models/carrinho_model.dart" beforeDir="false" afterPath="$PROJECT_DIR$/flutter_loja_app_meu/lib/models/carrinho_model.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/flutter_loja_app_meu/lib/pagamento/pagamento_cielo.dart" beforeDir="false" afterPath="$PROJECT_DIR$/flutter_loja_app_meu/lib/pagamento/pagamento_cielo.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flutter_loja_app_meu/lib/tabs/home_tab.dart" beforeDir="false" afterPath="$PROJECT_DIR$/flutter_loja_app_meu/lib/tabs/home_tab.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/flutter_loja_app_meu/lib/tabs/meu_cartao.dart" beforeDir="false" afterPath="$PROJECT_DIR$/flutter_loja_app_meu/lib/tabs/meu_cartao.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flutter_loja_app_meu/lib/tiles/ordem_tile.dart" beforeDir="false" afterPath="$PROJECT_DIR$/flutter_loja_app_meu/lib/tiles/ordem_tile.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flutter_loja_app_meu/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/flutter_loja_app_meu/pubspec.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flutter_loja_app_meu/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/flutter_loja_app_meu/pubspec.yaml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -17,6 +26,13 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="Pixel_2_API_28" />
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Dart File" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
   </component>
@@ -24,6 +40,10 @@
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="DEBUGGABLE_DEVICE" value="motorola-moto_g_7_-0054514720" />
+    <property name="DEBUGGABLE_PROCESS" value="br.com.brunoapp.flutter_loja_app_meu" />
+    <property name="DEBUGGER_ID" value="Java" />
+    <property name="SHOW_ALL_PROCESSES" value="true" />
     <property name="TODO_SCOPE" value="All Places" />
     <property name="dart.analysis.tool.window.force.activate" value="false" />
     <property name="io.flutter.reload.alreadyRun" value="true" />

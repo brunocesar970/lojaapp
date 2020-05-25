@@ -104,17 +104,18 @@ class CarrinhoModel extends Model {
     notifyListeners();
   }
 
-  double precoTotal(){
+  double precoTotal() {
     return getProdutoPreco() + fretePreco() - getDesconto();
   }
 
-  int pegarOrdemID(CarrinhoProduto carrinhoProduto){
+  int pegarOrdemID(CarrinhoProduto carrinhoProduto) {
     Firestore.instance
         .collection("user")
         .document(user.firebaseUser.uid)
         .collection("carrinho")
-        .document(carrinhoProduto.cid).get();
-}
+        .document(carrinhoProduto.cid)
+        .get();
+  }
 
   Future<String> finalizarPedido() async {
     if (products.length == 0) return null;
@@ -127,8 +128,16 @@ class CarrinhoModel extends Model {
     double desconto = getDesconto();
 
 
+    await Firestore.instance
+        .collection("status")
+        .document("pedidos")
+        .setData({"quantidadePedidos": FieldValue.increment(1)}, merge: true);
+    DocumentSnapshot pedidosSnapshot =
+    await Firestore.instance.collection("status").document("pedidos").get();
+    int ordemID = pedidosSnapshot.data["quantidadePedidos"] ;
     DocumentReference refOrdem =
         await Firestore.instance.collection("ordens").add({
+      "ordemId": ordemID,
       "clienteId": user.firebaseUser.uid,
       "products":
           products.map((carrinhoProduto) => carrinhoProduto.toMap()).toList(),
@@ -139,13 +148,13 @@ class CarrinhoModel extends Model {
       "status": 1
     });
 
-    Firestore.instance
+    await Firestore.instance
         .collection("user")
         .document(user.firebaseUser.uid)
         .collection("ordem")
         .document(refOrdem.documentID)
-        .setData({"ordemId": refOrdem.documentID});
-
+        .setData({"ordemId": refOrdem});
+// Como dividir para nn perder os dados e só apagar se caso o pagamento for aprovado do carrinho.
     QuerySnapshot query = await Firestore.instance
         .collection("user")
         .document(user.firebaseUser.uid)
@@ -160,8 +169,12 @@ class CarrinhoModel extends Model {
     descontoPorcentagem = 0;
     isLoading = false;
     notifyListeners();
-    return refOrdem.documentID;
-
-    }
+    return ordemID.toString();
   }
 
+  void apagarDocs (){
+
+
+
+  }
+}

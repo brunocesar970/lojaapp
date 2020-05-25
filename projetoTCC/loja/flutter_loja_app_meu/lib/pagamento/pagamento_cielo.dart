@@ -2,56 +2,67 @@ import 'package:cielo_ecommerce/cielo_ecommerce.dart';
 import 'package:flutter/material.dart';
 
 class Cielo {
-  static final CieloEcommerce _cielo = CieloEcommerce(
-    environment: Environment.production,
-    merchant: Merchant(
-      merchantId: "57be18b4-e44c-4a5d-9688-e360ccc9d27a",
-      merchantKey: "mebOy0Q6U4OxVghgDoXCbfP1xcNVTH6q1uDmGikP",
-    ),
-  );
 
-  static Future<void> makePayment({
+  static Future<String> makePayment({
     @required String cardNumber,
     @required String nameController,
     @required String dataController,
     @required String cvvController,
     @required double valor,
-    @required int ordem,
+    @required String ordem,
   }) async {
+
+     final CieloEcommerce _cielo = CieloEcommerce(
+      environment: Environment.sandbox,
+      merchant: Merchant(
+        merchantId: "547a44c7-db7e-4ce6-8de2-bd27929022b9",
+        merchantKey: "FGRHHWBZFCLNSJDBGJUZRXRVHAXBKKOQYJHSDPUC",
+      ),
+    );
+
+
     print('Transação Simples\nIniciando pagamento....');
     Sale sale = Sale(
-      merchantOrderId: "237474784",
+      merchantOrderId: ordem,
       customer: Customer(
-        name: "Comprador crédito simples",
+        name: "Bruno cesar",
       ),
       payment: Payment(
         type: TypePayment.creditCard,
         amount: (valor * 100).toInt(),
         installments: 1,
-        softDescriptor: "teste23",
+        softDescriptor: "hjdjd",
         creditCard: CreditCard(
           cardNumber: cardNumber,
           holder: nameController,
           expirationDate: dataController,
           securityCode: cvvController,
           brand: 'Master',
-          saveCard: true,
+          saveCard: false,
         ),
       ),
     );
     try {
       Sale response = await _cielo.createSale(sale);
+      print("ORDEMDOPEDIDO===  >>>>>>>  " + ordem);
       print('Payment Id:${response.payment.paymentId}');
-      print("Status:${response.payment.returnMessage}");
-      print("ReturnCODIGO ${response.payment.returnCode}");
+      print("Status:${response.payment.status}");
+      print("ReturnCOD ${response.payment.returnCode}");
+      print("Mensagem ${response.payment.returnMessage}");
       print("authorizationCode ${response.payment.authorizationCode}");
-      print("authenticate ${response.payment.authenticate}");
-      print("fraudAnalysis ${response.payment.fraudAnalysis}");
+
+      if (response.payment.authorizationCode != null){
+        return response.payment.paymentId;
+      } else {
+        return null;
+      }
+
     } on CieloException catch (e) {
       print(e);
-      print(e.message);
-      print(e.errors[0].message);
-      print(e.errors[0].code);
+      print('erroCath>  ${e.message}');
+      print('erroCath>  ${e.errors[0].message}');
+      print('erroCath>  ${e.errors[0].code}');
+      return null;
     }
   }
 }

@@ -67,7 +67,8 @@ class HomeTab extends StatelessWidget {
                           (doc){
                             return GestureDetector(
                               onTap: () async {
-                                var produto = await Firestore.instance.collection("produtos").document(doc.data["categoria"]).collection("itens").document(doc.data["produto"]).get();
+                                var produto = await Firestore.instance.collection("produtos").
+                                document(doc.data["categoria"]).collection("itens").document(doc.data["produto"]).get();
 
                                 ProductData p = ProductData.fromDocument(produto);
 
