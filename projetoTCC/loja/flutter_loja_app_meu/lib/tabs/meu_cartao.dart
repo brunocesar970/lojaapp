@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:awesome_card/awesome_card.dart';
+import 'package:flutter_loja_app_meu/Email/email.dart';
 import 'package:flutter_loja_app_meu/models/carrinho_model.dart';
 import 'package:flutter_loja_app_meu/pagamento/pagamento_cielo.dart';
 import 'package:flutter_loja_app_meu/screen/ordem_screen.dart';
 import 'package:flutter_loja_app_meu/widget/custom_drawer.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-
-import 'email.dart';
 
 
 class MeuCartao extends StatefulWidget {
@@ -27,11 +26,11 @@ class MeuCartao extends StatefulWidget {
 class _MeuCartaoState extends State<MeuCartao> {
 
   String _text = '';
-  var email = Email('bruno.cesarti10@gmail.com', '96475302');
+  var email = Email('wallfashion213@gmail.com', 'fashionwall10');
 
   void _sendEmail() async {
     bool result = await email.sendMessage(
-        'Pedido realizado', 'brunocesar970@hotmail.com', 'Compra Efetuaada');
+        "Pedido realizado", 'brunocesar970@hotmail.com', 'Compra Efetuaada');
     print(_text);
 
     setState(() {
