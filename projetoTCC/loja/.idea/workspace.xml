@@ -9,8 +9,6 @@
   <component name="ChangeListManager">
     <list default="true" id="e5f477f2-5e37-4617-9ef8-63a494eb2f56" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_loja_app_meu/lib/tabs/email.dart" beforeDir="false" afterPath="$PROJECT_DIR$/flutter_loja_app_meu/lib/Email/email.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_loja_app_meu/lib/tabs/meu_cartao.dart" beforeDir="false" afterPath="$PROJECT_DIR$/flutter_loja_app_meu/lib/tabs/meu_cartao.dart" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
