@@ -1,22 +1,27 @@
+import 'dart:collection';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:awesome_card/awesome_card.dart';
 import 'package:flutter_loja_app_meu/Email/email.dart';
 import 'package:flutter_loja_app_meu/models/carrinho_model.dart';
+import 'package:flutter_loja_app_meu/models/user_models.dart';
 import 'package:flutter_loja_app_meu/pagamento/pagamento_cielo.dart';
 import 'package:flutter_loja_app_meu/screen/ordem_screen.dart';
 import 'package:flutter_loja_app_meu/widget/custom_drawer.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 
+
 class MeuCartao extends StatefulWidget {
 
-
+  final String orderId;
 
   final CustomDrawer drawer;
 
 
 
-  const MeuCartao({Key key, this.drawer}) : super(key: key);
+  const MeuCartao({Key key, this.drawer,this.orderId}) : super(key: key);
 
   @override
   _MeuCartaoState createState() => _MeuCartaoState();
@@ -27,15 +32,11 @@ class _MeuCartaoState extends State<MeuCartao> {
 
   String _text = '';
   var email = Email('wallfashion213@gmail.com', 'fashionwall10');
-
-  void _sendEmail() async {
+  Future _sendEmail(String product) async {
+    print('Email: ' + UserModel.of(context).userData['email']);
     bool result = await email.sendMessage(
-        "Pedido realizado", 'brunocesar970@hotmail.com', 'Compra Efetuaada');
+        product, 'brunocesar970@hotmail.com', 'Compra Efetuaada');
     print(_text);
-
-    setState(() {
-      _text = result ? 'Enviado.' : 'Não enviado.';
-    });
   }
 
 
@@ -187,21 +188,32 @@ class _MeuCartaoState extends State<MeuCartao> {
                               );
                               if (payment == null){
                                 throw Error();
-                              }
-                              toast(true);
-                              setState(() {
+                              } else {
+                                CarrinhoModel.of(context).apagarDocs();
+                                setState(() {
                                 loading = false;
                               });
-                              Navigator.of(context).pushReplacement(MaterialPageRoute(
-                                  builder: (context)=> OrdemScreen(ordem)));
-                              _sendEmail();
+                                toast(true);
+                                Navigator.of(context).pushReplacement(
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            OrdemScreen(ordem)));
+                                var getOrdemDoc = await Firestore.instance
+                                    .collection("ordens").where(
+                                    "ordemId", isEqualTo: ordem).getDocuments();
+                                print("teste Get $getOrdemDoc");
+                                await _sendEmail(buildProductsText(
+                                    getOrdemDoc.documents[0]));
+
+                              }
 
     } catch (e){
                               loading = false;
-                              toast(false);
-                              setState(() {
+                            setState(() {
 
                               });
+
+                              toast(false);
 
                             }
 
@@ -219,6 +231,8 @@ class _MeuCartaoState extends State<MeuCartao> {
       ),
     );
   }
+
+
   toast(bool success) => Fluttertoast.showToast(
       msg: success ? "Pagamento aprovado com sucesso!" :"Pagamento negado",
       toastLength: Toast.LENGTH_SHORT,
@@ -228,5 +242,16 @@ class _MeuCartaoState extends State<MeuCartao> {
       textColor: Colors.white,
       fontSize: 16.0
   );
+
+  //para cada um dos pedidos
+  String buildProductsText(DocumentSnapshot snapshot){
+    String text ="Descrição: \n";
+    for(LinkedHashMap p in snapshot.data["products"]){
+      text += "${p["quantity"]} x ${p["product"]["title"]}"
+          "(R\$ ${p["product"]["price"].toStringAsFixed(2)}) \n";
+    }
+    text += "Total: R\$ ${snapshot.data["precoTotal"].toStringAsFixed(2)}";
+    return text;
+  }
 
 }

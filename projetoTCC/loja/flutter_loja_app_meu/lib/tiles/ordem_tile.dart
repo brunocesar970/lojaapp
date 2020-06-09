@@ -27,12 +27,11 @@ class OrdemTile extends StatelessWidget {
 
            } else{
              int status = snapshot.data["status"];
-             print("ordemPedido_tela $orderId");
              return Column(
                crossAxisAlignment: CrossAxisAlignment.start,
                children: <Widget>[
                  Text(
-                   "Código do Pedido $orderId",
+                   "Código do Pedido ${snapshot.data['ordemId']}",
                    style: TextStyle(fontWeight: FontWeight.bold),
                  ),
                  SizedBox(height: 4.0),

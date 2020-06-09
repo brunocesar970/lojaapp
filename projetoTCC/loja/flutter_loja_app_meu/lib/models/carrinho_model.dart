@@ -154,7 +154,13 @@ class CarrinhoModel extends Model {
         .collection("ordem")
         .document(refOrdem.documentID)
         .setData({"ordemId": refOrdem});
+        isLoading = false;
+        notifyListeners();
 // Como dividir para nn perder os dados e só apagar se caso o pagamento for aprovado do carrinho.
+    return ordemID.toString();
+  }
+
+  void apagarDocs () async{
     QuerySnapshot query = await Firestore.instance
         .collection("user")
         .document(user.firebaseUser.uid)
@@ -169,12 +175,6 @@ class CarrinhoModel extends Model {
     descontoPorcentagem = 0;
     isLoading = false;
     notifyListeners();
-    return ordemID.toString();
-  }
-
-  void apagarDocs (){
-
-
 
   }
 }
