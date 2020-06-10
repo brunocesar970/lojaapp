@@ -1,11 +1,8 @@
-import 'dart:collection';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:awesome_card/awesome_card.dart';
 import 'package:flutter_loja_app_meu/Email/email.dart';
 import 'package:flutter_loja_app_meu/models/carrinho_model.dart';
-import 'package:flutter_loja_app_meu/models/user_models.dart';
 import 'package:flutter_loja_app_meu/pagamento/pagamento_cielo.dart';
 import 'package:flutter_loja_app_meu/screen/ordem_screen.dart';
 import 'package:flutter_loja_app_meu/widget/custom_drawer.dart';
@@ -32,11 +29,16 @@ class _MeuCartaoState extends State<MeuCartao> {
 
   String _text = '';
   var email = Email('wallfashion213@gmail.com', 'fashionwall10');
-  Future _sendEmail(String product) async {
-    print('Email: ' + UserModel.of(context).userData['email']);
+
+  var ordemGlobal;
+  Future _sendEmail() async {
     bool result = await email.sendMessage(
-        product, 'brunocesar970@hotmail.com', 'Compra Efetuaada');
+        montarPedido().toString() , 'brunocesar970@hotmail.com', 'Compra Efetuaada');
     print(_text);
+
+    setState(() {
+      _text = result ? 'Enviado.' : 'Não enviado.';
+    });
   }
 
 
@@ -178,6 +180,7 @@ class _MeuCartaoState extends State<MeuCartao> {
                                 loading = true;
                               });
                               String ordem = await  CarrinhoModel.of(context).finalizarPedido();
+                              ordemGlobal = ordem;
                               String payment = await Cielo.makePayment(
                                   cardNumber: numeroCartaoController.text,
                                   nameController: nameController.text,
@@ -198,12 +201,18 @@ class _MeuCartaoState extends State<MeuCartao> {
                                     MaterialPageRoute(
                                         builder: (context) =>
                                             OrdemScreen(ordem)));
-                                var getOrdemDoc = await Firestore.instance
+                                await _sendEmail();
+
+
+
+                               /* var getOrdemDoc = await Firestore.instance
                                     .collection("ordens").where(
                                     "ordemId", isEqualTo: ordem).getDocuments();
                                 print("teste Get $getOrdemDoc");
                                 await _sendEmail(buildProductsText(
                                     getOrdemDoc.documents[0]));
+
+                                */
 
                               }
 
@@ -244,14 +253,19 @@ class _MeuCartaoState extends State<MeuCartao> {
   );
 
   //para cada um dos pedidos
-  String buildProductsText(DocumentSnapshot snapshot){
-    String text ="Descrição: \n";
-    for(LinkedHashMap p in snapshot.data["products"]){
-      text += "${p["quantity"]} x ${p["product"]["title"]}"
-          "(R\$ ${p["product"]["price"].toStringAsFixed(2)}) \n";
+  Future<String> montarPedido() async{
+    QuerySnapshot querySnapshot = await Firestore.instance.collection("ordens")
+        .where("ordemId",isEqualTo: ordemGlobal).getDocuments();
+    for (DocumentSnapshot item in querySnapshot.documents){
+      String texto;
+      texto = "Descrição: \n";
+      texto += "${item["quantity"]} x ${item["product"]["title"]}"
+          "(R\$ ${item["product"]["price"].toStringAsFixed(2)}) \n";
+
+      print(texto);
+      return texto;
     }
-    text += "Total: R\$ ${snapshot.data["precoTotal"].toStringAsFixed(2)}";
-    return text;
+
   }
 
 }

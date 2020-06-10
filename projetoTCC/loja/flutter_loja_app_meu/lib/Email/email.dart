@@ -5,13 +5,13 @@ class Email {
   String _username;
   var smtpServer;
 
-  Email(String username, String password){
+  Email(String username, String password) {
     _username = username;
     smtpServer = gmail(_username, password);
   }
 
-  Future<bool> sendMessage(String mensagem, String destinatario, String assunto) async {
-
+  Future<bool> sendMessage(String mensagem, String destinatario,
+      String assunto) async {
     //Configurar a mensagem
     final message = Message()
       ..from = Address(_username, 'Fashion Wall')
@@ -32,7 +32,4 @@ class Email {
       return false;
     }
   }
-
-
-
 }

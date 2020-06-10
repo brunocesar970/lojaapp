@@ -8,10 +8,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e5f477f2-5e37-4617-9ef8-63a494eb2f56" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/loja.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/loja.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_loja_app_meu/lib/models/carrinho_model.dart" beforeDir="false" afterPath="$PROJECT_DIR$/flutter_loja_app_meu/lib/models/carrinho_model.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flutter_loja_app_meu/lib/Email/email.dart" beforeDir="false" afterPath="$PROJECT_DIR$/flutter_loja_app_meu/lib/Email/email.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/flutter_loja_app_meu/lib/tabs/meu_cartao.dart" beforeDir="false" afterPath="$PROJECT_DIR$/flutter_loja_app_meu/lib/tabs/meu_cartao.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_loja_app_meu/lib/tiles/ordem_tile.dart" beforeDir="false" afterPath="$PROJECT_DIR$/flutter_loja_app_meu/lib/tiles/ordem_tile.dart" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -27,6 +27,9 @@
       </list>
     </option>
   </component>
+  <component name="GenerateSignedApkSettings">
+    <option name="BUILD_TARGET_KEY" value="apk" />
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
   </component>
@@ -34,6 +37,8 @@
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="ApkExportedModule" value="loja" />
+    <property name="BundleExportedModule" value="loja" />
     <property name="DEBUGGABLE_DEVICE" value="motorola-moto_g_7_-0054514720" />
     <property name="DEBUGGABLE_PROCESS" value="br.com.brunoapp.flutter_loja_app_meu" />
     <property name="DEBUGGER_ID" value="Java" />
@@ -42,11 +47,11 @@
     <property name="dart.analysis.tool.window.force.activate" value="false" />
     <property name="io.flutter.reload.alreadyRun" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../../teste teste/loja 2 versao" />
-    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
-    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.2" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
-    <property name="settings.editor.selected.configurable" value="dart.settings" />
+    <property name="settings.editor.selected.configurable" value="preferences.editor" />
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
   <component name="RecentsManager">

@@ -16,7 +16,7 @@
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
     <content url="file://$MODULE_DIR$">
-      <sourceFolder url="file://$MODULE_DIR$/gen" isTestSource="false" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/gen" isTestSource="false" packagePrefix="teste" generated="true" />
       <excludeFolder url="file://$MODULE_DIR$/flutter_loja_app_meu/.dart_tool" />
       <excludeFolder url="file://$MODULE_DIR$/flutter_loja_app_meu/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/flutter_loja_app_meu/build" />
