@@ -156,6 +156,13 @@
             </list>
           </value>
         </entry>
+        <entry key="flutter_launcher_icons">
+          <value>
+            <list>
+              <option value="$PROJECT_DIR$/../../../../Flutter SDK/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_launcher_icons-0.7.5/lib" />
+            </list>
+          </value>
+        </entry>
         <entry key="flutter_staggered_grid_view">
           <value>
             <list>
@@ -415,6 +422,13 @@
             </list>
           </value>
         </entry>
+        <entry key="yaml">
+          <value>
+            <list>
+              <option value="$PROJECT_DIR$/../../../../Flutter SDK/flutter/.pub-cache/hosted/pub.dartlang.org/yaml-2.2.1/lib" />
+            </list>
+          </value>
+        </entry>
       </option>
     </properties>
     <CLASSES>
@@ -439,6 +453,7 @@
       <root url="file://$PROJECT_DIR$/../../../../Flutter SDK/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_core-0.4.4/lib" />
       <root url="file://$PROJECT_DIR$/../../../../Flutter SDK/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_core_platform_interface-1.0.2/lib" />
       <root url="file://$PROJECT_DIR$/../../../../Flutter SDK/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_core_web-0.1.1+2/lib" />
+      <root url="file://$PROJECT_DIR$/../../../../Flutter SDK/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_launcher_icons-0.7.5/lib" />
       <root url="file://$PROJECT_DIR$/../../../../Flutter SDK/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_staggered_grid_view-0.3.0/lib" />
       <root url="file://$PROJECT_DIR$/../../../../Flutter SDK/flutter/.pub-cache/hosted/pub.dartlang.org/fluttertoast-4.0.1/lib" />
       <root url="file://$PROJECT_DIR$/../../../../Flutter SDK/flutter/.pub-cache/hosted/pub.dartlang.org/font_awesome_flutter-8.5.0/lib" />
@@ -473,6 +488,7 @@
       <root url="file://$PROJECT_DIR$/../../../../Flutter SDK/flutter/.pub-cache/hosted/pub.dartlang.org/url_launcher_web-0.1.1/lib" />
       <root url="file://$PROJECT_DIR$/../../../../Flutter SDK/flutter/.pub-cache/hosted/pub.dartlang.org/vector_math-2.0.8/lib" />
       <root url="file://$PROJECT_DIR$/../../../../Flutter SDK/flutter/.pub-cache/hosted/pub.dartlang.org/xml-3.5.0/lib" />
+      <root url="file://$PROJECT_DIR$/../../../../Flutter SDK/flutter/.pub-cache/hosted/pub.dartlang.org/yaml-2.2.1/lib" />
       <root url="file://$PROJECT_DIR$/../../../../Flutter SDK/flutter/bin/cache/pkg/sky_engine/lib" />
       <root url="file://$PROJECT_DIR$/../../../../Flutter SDK/flutter/packages/flutter/lib" />
       <root url="file://$PROJECT_DIR$/../../../../Flutter SDK/flutter/packages/flutter_test/lib" />

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_loja_app_meu/models/carrinho_model.dart';
 import 'package:flutter_loja_app_meu/models/user_models.dart';
-import 'package:flutter_loja_app_meu/screen/home_screen.dart';
+import 'package:flutter_loja_app_meu/screen/splash.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 
@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
                   primarySwatch: Colors.blue,
                   primaryColor: Color.fromARGB(255, 4, 125, 141)
               ),
-              home: HomeScreen(),
+              home: Splash(),
               debugShowCheckedModeBanner: false,
             ),
           );

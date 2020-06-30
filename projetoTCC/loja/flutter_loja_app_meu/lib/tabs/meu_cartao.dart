@@ -30,10 +30,12 @@ class _MeuCartaoState extends State<MeuCartao> {
   String _text = '';
   var email = Email('wallfashion213@gmail.com', 'fashionwall10');
 
+
   var ordemGlobal;
   Future _sendEmail() async {
+    String pedido = await montarPedido();
     bool result = await email.sendMessage(
-        montarPedido().toString() , 'brunocesar970@hotmail.com', 'Compra Efetuaada');
+       pedido, 'brunocesar970@hotmail.com', 'Compra Efetuaada');
     print(_text);
 
     setState(() {
@@ -254,18 +256,17 @@ class _MeuCartaoState extends State<MeuCartao> {
 
   //para cada um dos pedidos
   Future<String> montarPedido() async{
+
+    String texto;
     QuerySnapshot querySnapshot = await Firestore.instance.collection("ordens")
         .where("ordemId",isEqualTo: ordemGlobal).getDocuments();
     for (DocumentSnapshot item in querySnapshot.documents){
-      String texto;
-      texto = "Descrição: \n";
-      texto += "${item["quantity"]} x ${item["product"]["title"]}"
+        texto = "Descrição: \n ${item["quantity"]} x ${item["product"]["title"]}"+
           "(R\$ ${item["product"]["price"].toStringAsFixed(2)}) \n";
 
       print(texto);
-      return texto;
     }
-
+    return texto;
   }
 
 }
