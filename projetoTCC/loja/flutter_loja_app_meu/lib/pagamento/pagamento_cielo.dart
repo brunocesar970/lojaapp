@@ -15,8 +15,8 @@ class Cielo {
      final CieloEcommerce _cielo = CieloEcommerce(
       environment: Environment.sandbox,
       merchant: Merchant(
-        merchantId: "547a44c7-db7e-4ce6-8de2-bd27929022b9",
-        merchantKey: "FGRHHWBZFCLNSJDBGJUZRXRVHAXBKKOQYJHSDPUC",
+        merchantId: "547a44c7-db7e-4ce6-8de2-bd27929022b9SSS",
+        merchantKey: "FGRHHWBZFCLNSJDBGJUZRXRVHAXBKKOQYJHSDPUCPSSS",
       ),
     );
 
